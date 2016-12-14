@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,12 +13,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import layout.BookFragment;
 import layout.CollectionFragment;
 import layout.TimelineFragment;
 
 public class MenuActivity extends  AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+/*
+    public TimelineFragment timelineFragment;
+    public CollectionFragment collectionFragment;
+    public BookFragment bookFragment;
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +41,18 @@ public class MenuActivity extends  AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+/*
+        timelineFragment = new TimelineFragment();
+        collectionFragment = new CollectionFragment();
+        bookFragment = new BookFragment();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.relative_content_menu,timelineFragment,timelineFragment.getTag());
+        fragmentTransaction.add(R.id.relative_content_menu,collectionFragment,collectionFragment.getTag());
+        fragmentTransaction.add(R.id.relative_content_menu,bookFragment,bookFragment.getTag());
+        fragmentTransaction.commit();
+        */
     }
 
     @Override

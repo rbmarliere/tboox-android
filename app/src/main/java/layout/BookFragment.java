@@ -4,8 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +13,23 @@ import info.nsupdate.tboox.tboox.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CollectionFragment.OnFragmentInteractionListener} interface
+ * {@link BookFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CollectionFragment#newInstance} factory method to
+ * Use the {@link BookFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CollectionFragment extends android.support.v4.app.Fragment{
+public class BookFragment extends android.support.v4.app.Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     private String mParam1;
     private String mParam2;
-    private static FloatingActionButton fabAdd;
 
     private OnFragmentInteractionListener mListener;
 
-    public CollectionFragment() {
+    public BookFragment() {
         // Required empty public constructor
     }
 
@@ -43,19 +39,16 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CollectionFragment.
+     * @return A new instance of fragment BookFragment.
      */
-  
-    public static CollectionFragment newInstance(String param1, String param2) {
-        CollectionFragment fragment = new CollectionFragment();
+
+    public static BookFragment newInstance(String param1, String param2) {
+        BookFragment fragment = new BookFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-
-
         return fragment;
-
     }
 
     @Override
@@ -71,27 +64,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_collection, container, false);
-
-        fabAdd = (FloatingActionButton) v.findViewById(R.id.floatingActionButtonAdd);
-        fabAdd.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                BookFragment bookFragment = new BookFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-
-                fragmentManager.beginTransaction().replace(R.id.relative_content_menu,bookFragment,bookFragment.getTag()).commit();
-
-            }
-        });
-
-        return v;
-
-
+        return inflater.inflate(R.layout.fragment_book, container, false);
     }
 
 
@@ -104,12 +77,14 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
+        /*
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
+        */
     }
 
     @Override
