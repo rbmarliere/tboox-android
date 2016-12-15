@@ -4,6 +4,7 @@ package info.nsupdate.tboox.tboox.utils;
 
 public class APIException
 {
-    public APIException(String message) {
+    public APIException(String message)
+    {
     }
 }
