@@ -109,18 +109,21 @@ public class HTTPSConnector extends AsyncHttpClient
             tmf.init(keyStore);
 
             // TODO: buy a proper certificate...
-            TrustManager tm = new X509TrustManager() {
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+            TrustManager tm = new X509TrustManager()
+            {
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException
+                {
                 }
 
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException
+                {
                 }
 
-                public X509Certificate[] getAcceptedIssuers() {
+                public X509Certificate[] getAcceptedIssuers()
+                {
                     return new X509Certificate[0];
                 }
             };
-
             X509HostnameVerifier hv = new X509HostnameVerifier()
             {
                 @Override
