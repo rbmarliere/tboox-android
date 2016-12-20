@@ -1,5 +1,6 @@
 package info.nsupdate.tboox.tboox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import layout.BookListFragment;
 import layout.CollectionListFragment;
 import layout.TimelineFragment;
 
@@ -73,22 +75,26 @@ public class MenuActivity extends  AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         if (id == R.id.nav_timeline) {
             TimelineFragment timelineFragment = new TimelineFragment();
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.relative_content_menu,timelineFragment,timelineFragment.getTag()).commit();
+            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, timelineFragment, timelineFragment.getTag()).commit();
+        } else if (id == R.id.nav_book) {
+            BookListFragment bookListFragment = new BookListFragment();
+            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, bookListFragment, bookListFragment.getTag()).commit();
         } else if (id == R.id.nav_collection) {
             CollectionListFragment collectionListFragment = new CollectionListFragment();
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.relative_content_menu, collectionListFragment, collectionListFragment.getTag()).commit();
         } else if (id == R.id.nav_logout) {
-
+            // todo: Services.forget_token() request...
+            startActivity(new Intent(MenuActivity.this, LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }
