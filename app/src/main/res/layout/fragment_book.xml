@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="layout.BookFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <EditText
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etNome"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Nome do livro" />
+
+    <EditText
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+        android:ems="10"
+            android:id="@+id/etAutor"
+            android:layout_row="1"
+            android:layout_column="1"
+        android:layout_below="@+id/etNome"
+        android:layout_alignParentEnd="true"
+        android:hint="Autor(a)" />
+
+    <ImageView
+        android:layout_width="92dp"
+        android:layout_height="133dp"
+        app:srcCompat="@drawable/ic_menu_gallery"
+        android:id="@+id/imageView2"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/etNome"
+        android:layout_marginEnd="9dp" />
+
+    <EditText
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etAno"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_below="@+id/etAutor"
+        android:layout_alignParentEnd="true"
+        android:hint="Ano" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_marginStart="21dp"
+        android:id="@+id/etObs"
+        android:hint="Observações"
+        android:layout_height="200dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2" />
+
+    <Button
+        android:text="Adicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/btAdicionar"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="55dp" />
+
+    <Button
+        android:text="Cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btCancelar"
+        android:background="@android:color/holo_red_light"
+        android:layout_alignBaseline="@+id/btAdicionar"
+        android:layout_alignBottom="@+id/btAdicionar"
+        android:layout_alignStart="@+id/etObs"
+        android:layout_marginStart="16dp" />
+
+
+</RelativeLayout>
