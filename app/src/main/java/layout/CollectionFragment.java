@@ -80,7 +80,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                System.out.println("oops..");
+                System.out.println(errorResponse.toString());
             }
 
             @Override

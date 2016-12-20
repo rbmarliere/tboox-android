@@ -12,6 +12,11 @@ public class Services
 {
     private static HTTPSConnector conn = new HTTPSConnector();
 
+    public static void set_token(String token)
+    {
+        conn.set_token(token);
+    }
+
     public static void delete(Context context, ResponseHandlerInterface handler, String path)
     {
         conn.request(context, HTTPSConnector.method.conn_method_DELETE, path, null, handler);

@@ -40,6 +40,7 @@ public class HTTPSConnector extends AsyncHttpClient
 
     private static Certificate cert = null;
     private static SSLSocketFactory sf = null;
+    private static String token = null;
 
     public enum method
     {
@@ -58,11 +59,13 @@ public class HTTPSConnector extends AsyncHttpClient
         try {
             init_ssl();
 
-            byte[] params = new byte[0];
-            if (parameters != null)
-                params = parameters.toString().getBytes("UTF-8");
+            if (parameters == null)
+                parameters = new JSONObject();
 
-            ByteArrayEntity entity = new ByteArrayEntity(params);
+            if (token != null)
+                addHeader("Authorization", "Bearer " + token);
+
+            ByteArrayEntity entity = new ByteArrayEntity(parameters.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
             switch (method) {
@@ -89,6 +92,11 @@ public class HTTPSConnector extends AsyncHttpClient
     private void set_cert(Certificate crt)
     {
         this.cert = crt;
+    }
+
+    public void set_token(String token)
+    {
+        this.token = token;
     }
 
     private void init_ssl()

@@ -183,6 +183,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 System.out.println(response.toString());
+                try {
+                    Services.set_token(String.valueOf(response.get("token")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             }
 
