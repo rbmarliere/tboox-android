@@ -19,12 +19,12 @@ import info.nsupdate.tboox.tboox.utils.Services;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CollectionFragment.OnFragmentInteractionListener} interface
+ * {@link CollectionListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CollectionFragment#newInstance} factory method to
+ * Use the {@link CollectionListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CollectionFragment extends android.support.v4.app.Fragment{
+public class CollectionListFragment extends android.support.v4.app.Fragment{
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,7 +38,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
     private OnFragmentInteractionListener mListener;
     private JSONObject data;
 
-    public CollectionFragment() {
+    public CollectionListFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +48,11 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CollectionFragment.
+     * @return A new instance of fragment CollectionListFragment.
      */
 
-    public static CollectionFragment newInstance(String param1, String param2) {
-        CollectionFragment fragment = new CollectionFragment();
+    public static CollectionListFragment newInstance(String param1, String param2) {
+        CollectionListFragment fragment = new CollectionListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -104,7 +104,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_collection, container, false);
+        View v = inflater.inflate(R.layout.fragment_collection_list, container, false);
 
         fabAdd = (FloatingActionButton) v.findViewById(R.id.floatingActionButtonAdd);
         fabAdd.setOnClickListener(new View.OnClickListener()
@@ -113,7 +113,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
             public void onClick(View v)
             {
                 BookListFragment bookListFragment = new BookListFragment();
-                //BookFragment bookFragment = new BookFragment();
+                //BookDetailFragment bookFragment = new BookDetailFragment();
 
                 FragmentManager fragmentManager = getFragmentManager();
 

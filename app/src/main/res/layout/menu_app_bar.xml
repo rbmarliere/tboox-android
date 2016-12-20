@@ -22,6 +22,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_menu" />
+    <include layout="@layout/menu_content" />
 
 </android.support.design.widget.CoordinatorLayout>

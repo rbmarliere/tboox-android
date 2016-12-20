@@ -2,9 +2,7 @@ package info.nsupdate.tboox.tboox;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,8 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import layout.BookFragment;
-import layout.CollectionFragment;
+import layout.CollectionListFragment;
 import layout.TimelineFragment;
 
 public class MenuActivity extends  AppCompatActivity
@@ -22,8 +19,8 @@ public class MenuActivity extends  AppCompatActivity
 
 /*
     public TimelineFragment timelineFragment;
-    public CollectionFragment collectionFragment;
-    public BookFragment bookFragment;
+    public CollectionListFragment collectionFragment;
+    public BookDetailFragment bookFragment;
 */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +40,8 @@ public class MenuActivity extends  AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 /*
         timelineFragment = new TimelineFragment();
-        collectionFragment = new CollectionFragment();
-        bookFragment = new BookFragment();
+        collectionFragment = new CollectionListFragment();
+        bookFragment = new BookDetailFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,11 +100,11 @@ public class MenuActivity extends  AppCompatActivity
 
         } else if (id == R.id.nav_collection) {
 
-            CollectionFragment collectionFragment = new CollectionFragment();
+            CollectionListFragment collectionListFragment = new CollectionListFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
 
-            fragmentManager.beginTransaction().replace(R.id.relative_content_menu,collectionFragment,collectionFragment.getTag()).commit();
+            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, collectionListFragment, collectionListFragment.getTag()).commit();
 
         } else if (id == R.id.nav_logout) {
 

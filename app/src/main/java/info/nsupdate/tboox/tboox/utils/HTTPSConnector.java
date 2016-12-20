@@ -32,11 +32,11 @@ import cz.msebera.android.httpclient.protocol.HTTP;
 
 public class HTTPSConnector extends AsyncHttpClient
 {
-    private static final String URL_crt = "http://tboox.nsupdate.info/tboox.crt";
-    private static final String URL_api = "https://tboox.nsupdate.info/api";
+    //private static final String URL_crt = "http://tboox.nsupdate.info/tboox.crt";
+    //private static final String URL_api = "https://tboox.nsupdate.info/api";
 
-    //private static final String URL_crt = "http://192.168.1.17/tboox.crt";
-    //private static final String URL_api = "https://192.168.1.17/api";
+    private static final String URL_crt = "http://192.168.1.17/tboox.crt";
+    private static final String URL_api = "https://192.168.1.17/api";
 
     private static Certificate cert = null;
     private static SSLSocketFactory sf = null;

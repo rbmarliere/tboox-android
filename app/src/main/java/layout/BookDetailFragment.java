@@ -20,12 +20,12 @@ import info.nsupdate.tboox.tboox.utils.Services;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BookFragment.OnFragmentInteractionListener} interface
+ * {@link BookDetailFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BookFragment#newInstance} factory method to
+ * Use the {@link BookDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BookFragment extends android.support.v4.app.Fragment {
+public class BookDetailFragment extends android.support.v4.app.Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,7 +37,7 @@ public class BookFragment extends android.support.v4.app.Fragment {
     private OnFragmentInteractionListener mListener;
     private JSONObject data;
 
-    public BookFragment() {
+    public BookDetailFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +47,11 @@ public class BookFragment extends android.support.v4.app.Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BookFragment.
+     * @return A new instance of fragment BookDetailFragment.
      */
 
-    public static BookFragment newInstance(String param1, String param2) {
-        BookFragment fragment = new BookFragment();
+    public static BookDetailFragment newInstance(String param1, String param2) {
+        BookDetailFragment fragment = new BookDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -95,7 +95,7 @@ public class BookFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book, container, false);
+        return inflater.inflate(R.layout.fragment_book_detail, container, false);
     }
 
 
