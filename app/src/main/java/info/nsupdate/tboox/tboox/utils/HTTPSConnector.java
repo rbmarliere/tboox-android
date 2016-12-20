@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -57,7 +58,11 @@ public class HTTPSConnector extends AsyncHttpClient
         try {
             init_ssl();
 
-            ByteArrayEntity entity = new ByteArrayEntity(parameters.toString().getBytes("UTF-8"));
+            byte[] params = new byte[0];
+            if (parameters != null)
+                params = parameters.toString().getBytes("UTF-8");
+
+            ByteArrayEntity entity = new ByteArrayEntity(params);
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
             switch (method) {
