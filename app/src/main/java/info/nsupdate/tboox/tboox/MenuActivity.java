@@ -15,20 +15,14 @@ import layout.CollectionListFragment;
 import layout.TimelineFragment;
 
 public class MenuActivity extends  AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-/*
-    public TimelineFragment timelineFragment;
-    public CollectionListFragment collectionFragment;
-    public BookDetailFragment bookFragment;
-*/
+        implements NavigationView.OnNavigationItemSelectedListener
+{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -38,18 +32,9 @@ public class MenuActivity extends  AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-/*
-        timelineFragment = new TimelineFragment();
-        collectionFragment = new CollectionListFragment();
-        bookFragment = new BookDetailFragment();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.relative_content_menu,timelineFragment,timelineFragment.getTag());
-        fragmentTransaction.add(R.id.relative_content_menu,collectionFragment,collectionFragment.getTag());
-        fragmentTransaction.add(R.id.relative_content_menu,bookFragment,bookFragment.getTag());
-        fragmentTransaction.commit();
-        */
+        // calling first fragment available as default
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
     }
 
     @Override
@@ -64,8 +49,8 @@ public class MenuActivity extends  AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        // Inflate the menu_upper_drawer; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_upper_drawer, menu);
         return true;
     }
 
@@ -87,43 +72,21 @@ public class MenuActivity extends  AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_timeline) {
-
             TimelineFragment timelineFragment = new TimelineFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
-
             fragmentManager.beginTransaction().replace(R.id.relative_content_menu,timelineFragment,timelineFragment.getTag()).commit();
-
-
         } else if (id == R.id.nav_collection) {
-
             CollectionListFragment collectionListFragment = new CollectionListFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
-
             fragmentManager.beginTransaction().replace(R.id.relative_content_menu, collectionListFragment, collectionListFragment.getTag()).commit();
-
         } else if (id == R.id.nav_logout) {
 
         }
-/*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
