@@ -115,6 +115,11 @@ public class BookListFragment extends android.support.v4.app.Fragment {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 System.out.println("oops..");
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println(responseString);
+            }
         };
 
         Services.get(this.getContext(), handler, "/book");

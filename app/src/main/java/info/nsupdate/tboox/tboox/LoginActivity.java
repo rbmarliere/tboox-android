@@ -182,13 +182,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println(response.toString());
                 startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                System.out.println("oops..");
-                //finalFocusView.requestFocus();
+                System.out.println(errorResponse.toString());
+                recreate();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println(responseString);
+                recreate();
             }
         };
 
