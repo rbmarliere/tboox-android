@@ -58,7 +58,6 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
 
-
         return fragment;
 
     }
@@ -85,8 +84,7 @@ public class CollectionFragment extends android.support.v4.app.Fragment{
             }
         };
 
-        System.out.print("collectionfragment");
-        Services.get(this.getContext(), handler, "/book");
+        Services.get(this.getContext(), handler, "/collection");
     }
 
     private void show_data() {

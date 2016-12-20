@@ -7,8 +7,15 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 import info.nsupdate.tboox.tboox.R;
+import info.nsupdate.tboox.tboox.utils.Services;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +35,7 @@ public class BookFragment extends android.support.v4.app.Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private JSONObject data;
 
     public BookFragment() {
         // Required empty public constructor
@@ -58,6 +66,29 @@ public class BookFragment extends android.support.v4.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println("setting data!");
+                set_data(response);
+                show_data();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                System.out.println("oops..");
+            }
+        };
+
+        Services.get(this.getContext(), handler, "/book");
+    }
+
+    private void show_data() {
+        String result = data.toString().substring(1, data.toString().length() - 1);
+
+        TextView data = (TextView) getView().findViewById(R.id.data);
+        data.setText(result);
     }
 
     @Override
@@ -91,6 +122,10 @@ public class BookFragment extends android.support.v4.app.Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void set_data(JSONObject data) {
+        this.data = data;
     }
 
     /**
