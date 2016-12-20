@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import info.nsupdate.tboox.tboox.R;
+import info.nsupdate.tboox.tboox.models.Book;
 import info.nsupdate.tboox.tboox.utils.Services;
 
 /**
@@ -79,36 +80,7 @@ public class BookListFragment extends android.support.v4.app.Fragment {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 System.out.println("setting data!");
                 set_data(response);
-
-                try {
-
-                    JSONObject jsonObject = new JSONObject(response.toString());
-
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    int count=0;
-                    String uuid="", title="", synopsis="";
-                    ArrayList<String> test = new ArrayList<>();
-                    while (count<jsonArray.length())
-                    {
-                        JSONObject jo = jsonArray.getJSONObject(count);
-                        uuid = jo.getString("uuid");
-                        title = jo.getString("title");
-                        synopsis = jo.getString("synopsis");
-                        count++;
-                        String teste = uuid+" "+title+" "+synopsis;
-                        test.add(teste);
-                    }
-
-                    ListAdapter listAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,test);
-
-                    ListView bookListView = (ListView) getView().findViewById(R.id.lv_Books);
-
-                    bookListView.setAdapter(listAdapter);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                show_data();
             }
 
             @Override
@@ -123,6 +95,28 @@ public class BookListFragment extends android.support.v4.app.Fragment {
         };
 
         Services.get(this.getContext(), handler, "/book");
+    }
+
+    public void set_data(JSONObject data) {
+        this.data = data;
+    }
+
+    private void show_data()
+    {
+        try {
+            JSONArray data_array = this.data.getJSONArray("data");
+
+            ArrayList<Book> books = new ArrayList<>();
+            for (int i = 0; i < this.data.length(); i++)
+                books.add(new Book(data_array.getJSONObject(i)));
+
+            ListAdapter listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, books);
+
+            ListView bookListView = (ListView) getView().findViewById(R.id.books);
+            bookListView.setAdapter(listAdapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -172,7 +166,5 @@ public class BookListFragment extends android.support.v4.app.Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public void set_data(JSONObject data) {
-        this.data = data;
-    }
+
 }

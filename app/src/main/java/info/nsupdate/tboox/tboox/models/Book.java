@@ -1,6 +1,8 @@
 package info.nsupdate.tboox.tboox.models;
 
-/* Created by nemo on 12/14/16. */
+/* Created by rbmarliere on 12/14/16. */
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
 
@@ -12,4 +14,8 @@ public class Book extends Model implements Serializable
     private String title;
     private String synopsis;
     private String created_at;
+
+    public Book(JSONObject jsonObject) {
+
+    }
 }

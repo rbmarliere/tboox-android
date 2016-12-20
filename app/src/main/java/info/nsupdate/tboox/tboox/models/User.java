@@ -1,6 +1,6 @@
 package info.nsupdate.tboox.tboox.models;
 
-/* Created by nemo on 12/14/16. */
+/* Created by rbmarliere on 12/14/16. */
 
 import java.io.Serializable;
 
