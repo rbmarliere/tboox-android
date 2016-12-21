@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,22 +19,38 @@ import info.nsupdate.tboox.tboox.R;
 import info.nsupdate.tboox.tboox.models.Collection;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
+import layout.CollectionListFragment;
 
 /* Created by rbmarliere on 12/21/16. */
 
 public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> implements View.OnClickListener
 {
-    private ArrayList<Collection> collection;
+    public interface CollectionAdapterListener {
+        void didClickCollection(Collection collection);
+    }
 
-    public CollectionAdapter(ArrayList<Collection> collection) {
+    private ArrayList<Collection> collection;
+    private CollectionAdapterListener listener;
+
+    public CollectionAdapter(ArrayList<Collection> collection, CollectionAdapterListener listener) {
         this.collection = collection;
+        this.listener = listener;
     }
 
     @Override
     public CollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.holder_collection_list, parent, false);
+
         CollectionAdapter.ViewHolder vh = new CollectionAdapter.ViewHolder(v);
+        vh.relativeLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int position = (int)v.getTag();
+                if (listener != null)
+                    listener.didClickCollection(collection.get(position));
+            }
+        });
 
         return vh;
     }
@@ -45,6 +62,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         holder.book_id.setText(c.getBook_id());
         holder.uuid.setText(c.getUuid());
         holder.created_at.setText(c.getCreated_at());
+
+        holder.relativeLayout.setTag(position);
 
         holder.btnDel.setOnClickListener(this);
         holder.btnDel.setTag(position);
@@ -83,6 +102,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         public TextView uuid;
         public TextView book_id;
         public TextView created_at;
+        public RelativeLayout relativeLayout;
         public Button btnDel;
 
         public ViewHolder(View v) {
@@ -91,6 +111,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             this.uuid = (TextView) v.findViewById(R.id.uuid);
             this.book_id = (TextView) v.findViewById(R.id.book_id);
             this.created_at = (TextView) v.findViewById(R.id.created_at);
+            this.relativeLayout = (RelativeLayout) v.findViewById(R.id.relLayout);
             this.btnDel = (Button) v.findViewById(R.id.btnDel);
 
             v.setClickable(true);

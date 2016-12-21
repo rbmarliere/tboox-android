@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,13 +16,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import info.nsupdate.tboox.tboox.BookDetailActivity;
 import info.nsupdate.tboox.tboox.R;
+import info.nsupdate.tboox.tboox.adapters.BookAdapter;
 import info.nsupdate.tboox.tboox.adapters.CollectionAdapter;
+import info.nsupdate.tboox.tboox.models.Book;
 import info.nsupdate.tboox.tboox.models.Collection;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 
-public class CollectionListFragment extends android.support.v4.app.Fragment
+public class CollectionListFragment extends android.support.v4.app.Fragment implements CollectionAdapter.CollectionAdapterListener
 {
     private CollectionListFragment.OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -48,7 +52,7 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
                     for (int i = 0; i < data_array.length(); i++)
                         collection.add(new Collection(data_array.getJSONObject(i)));
 
-                    mAdapter = new CollectionAdapter(collection);
+                    mAdapter = new CollectionAdapter(collection, CollectionListFragment.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -93,6 +97,21 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
     {
         if (mListener != null)
             mListener.onFragmentInteraction(uri);
+    }
+
+    @Override
+    public void didClickCollection(Collection collection) {
+        final String uuid = collection.getBook_id();
+        APIHandler handler = new APIHandler() {
+            @Override
+            public void handle_data(JSONObject response) {
+                Intent i = new Intent(getContext(), BookDetailActivity.class);
+                i.putExtra("book", new Book(response));
+                startActivity(i);
+            }
+        };
+
+        Services.get(this.getContext(), handler, "/book/" + uuid);
     }
 
     /**
