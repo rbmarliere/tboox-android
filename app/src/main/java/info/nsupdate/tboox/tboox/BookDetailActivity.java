@@ -33,6 +33,9 @@ public class BookDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
+        getSupportActionBar().setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent i = getIntent();
         Book b = (Book) i.getSerializableExtra("book");
 
@@ -45,4 +48,9 @@ public class BookDetailActivity extends AppCompatActivity
         synopsis.setText(b.getSynopsis());
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

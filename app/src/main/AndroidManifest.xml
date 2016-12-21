@@ -29,8 +29,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".BookDetailActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Livro"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
