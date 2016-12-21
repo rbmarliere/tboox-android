@@ -47,7 +47,7 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
                     JSONArray data_array = response.getJSONArray("data");
 
                     ArrayList<Collection> collection = new ArrayList<>();
-                    for (int i = 0; i < response.length(); i++)
+                    for (int i = 0; i < data_array.length(); i++)
                         collection.add(new Collection(data_array.getJSONObject(i)));
 
                     mAdapter = new CollectionAdapter(collection);
@@ -55,6 +55,7 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                mAdapter.notifyDataSetChanged();
             }
         };
 

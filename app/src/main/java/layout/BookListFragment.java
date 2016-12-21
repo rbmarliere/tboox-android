@@ -50,8 +50,6 @@ public class BookListFragment extends android.support.v4.app.Fragment
 
                     mAdapter = new BookAdapter(books);
                     mRecyclerView.setAdapter(mAdapter);
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

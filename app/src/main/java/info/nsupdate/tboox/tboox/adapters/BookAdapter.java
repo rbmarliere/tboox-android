@@ -19,18 +19,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
 {
     private ArrayList<Book> books;
 
-    public BookAdapter(ArrayList<Book> books) {
-
-        this.books = books;
-    }
+    public BookAdapter(ArrayList<Book> books) {this.books = books;}
 
     @Override
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.holder_book_list, parent, false);
-        // set the view's size, margins, paddings and layout parameters
-        //...
         ViewHolder vh = new ViewHolder(v);
 
 
@@ -40,8 +34,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
 
             }
         });
-
-
         return vh;
 
     }
@@ -50,15 +42,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
     public void onBindViewHolder(ViewHolder holder, int position) {
         Book b = books.get(position);
         holder.title.setText(b.getTitle());
-        holder.uuid.setText(b.getUuid());
+        //holder.uuid.setText(b.getUuid());
         holder.synopsis.setText(b.getSynopsis());
-        holder.created_at.setText(b.getCreated_at());
+        //holder.created_at.setText(b.getCreated_at());
     }
 
     @Override
-    public int getItemCount() {
-        return books.size();
-    }
+    public int getItemCount() {return books.size();}
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -74,9 +64,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         public ViewHolder(View v) {
             super(v);
             this.title = (TextView) v.findViewById(R.id.title);
-            this.uuid = (TextView) v.findViewById(R.id.uuid);
+            //this.uuid = (TextView) v.findViewById(R.id.uuid);
             this.synopsis = (TextView) v.findViewById(R.id.synopsis);
-            this.created_at = (TextView) v.findViewById(R.id.created_at);
+            //this.created_at = (TextView) v.findViewById(R.id.created_at);
             this.relativeLayout = (RelativeLayout) v.findViewById(R.id.relLayout);
             this.cardView = (CardView) v.findViewById(R.id.cardview);
             v.setClickable(true);
