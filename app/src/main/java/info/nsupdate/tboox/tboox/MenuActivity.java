@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import layout.BookListFragment;
 import layout.CollectionListFragment;
 import layout.TimelineListFragment;
+import layout.UserListFragment;
 
 public class MenuActivity extends  AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -87,6 +88,9 @@ public class MenuActivity extends  AppCompatActivity
         } else if (id == R.id.nav_collection) {
             CollectionListFragment collectionListFragment = new CollectionListFragment();
             fragmentManager.beginTransaction().replace(R.id.relative_content_menu, collectionListFragment, collectionListFragment.getTag()).commit();
+        } else if (id == R.id.nav_users) {
+            UserListFragment userListFragment = new UserListFragment();
+            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, userListFragment, userListFragment.getTag()).commit();
         } else if (id == R.id.nav_logout) {
             // todo: Services.forget_token() request...
             startActivity(new Intent(MenuActivity.this, LoginActivity.class));
