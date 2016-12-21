@@ -1,38 +1,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.CollectionListFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
+    tools:context="layout.BookListFragment">
 
     <TextView
-            android:id="@+id/data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Collection Fragment" />
+        android:text="Coleção"
+        android:id="@+id/caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="424dp"
-            android:id="@+id/listview_collection"
-            android:layout_weight="0.40" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:fabSize="mini"
-            app:srcCompat="@android:drawable/ic_input_add"
-            android:id="@+id/floatingActionButtonAdd"
-            android:layout_weight="0.48"
-            android:layout_gravity="bottom|right" />
-    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/collection_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/caption"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
