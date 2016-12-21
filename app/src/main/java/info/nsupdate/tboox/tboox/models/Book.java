@@ -18,4 +18,20 @@ public class Book extends Model implements Serializable
     public Book(JSONObject jsonObject) {
 
     }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
 }
