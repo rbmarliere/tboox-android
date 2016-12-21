@@ -64,11 +64,11 @@ public class TimelineListFragment extends android.support.v4.app.Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_book_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_timeline_list, container, false);
 
         mLayoutManager = new LinearLayoutManager(this.getContext());
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.book_recycler_view);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.timeline_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
