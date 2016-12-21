@@ -2,6 +2,7 @@ package info.nsupdate.tboox.tboox.models;
 
 /* Created by rbmarliere on 12/14/16. */
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -15,8 +16,15 @@ public class Book extends Model implements Serializable
     private String synopsis;
     private String created_at;
 
-    public Book(JSONObject jsonObject) {
-
+    public Book(JSONObject json) {
+        try {
+            this.uuid = (String) json.get("uuid");
+            this.title = (String) json.get("title");
+            this.synopsis = (String) json.get("synopsis");
+            this.created_at = (String) json.get("created_at");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUuid() {
