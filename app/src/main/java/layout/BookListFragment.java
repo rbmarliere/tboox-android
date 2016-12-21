@@ -3,6 +3,7 @@ package layout;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class BookListFragment extends android.support.v4.app.Fragment
     {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
