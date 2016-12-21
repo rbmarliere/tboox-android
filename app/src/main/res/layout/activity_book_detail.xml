@@ -6,19 +6,6 @@
     tools:context=".BookDetailActivity">
 
     <EditText
-        android:layout_width="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/synopsis"
-        android:hint="Sinopse"
-        android:layout_height="200dp"
-        android:layout_marginTop="55dp"
-        android:enabled="false"
-        android:layout_below="@+id/title"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
         android:layout_width="244dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -45,5 +32,55 @@
         android:layout_below="@+id/title"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/synopsis"
+        android:hint="Sinopse"
+        android:layout_height="100dp"
+        android:enabled="false"
+        android:layout_below="@+id/uuid"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <EditText
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/review_description"
+        android:hint="Review"
+        android:layout_height="100dp"
+        android:layout_below="@+id/synopsis"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:visibility="gone"
+        android:onClick="saveReview"
+        android:text="Criar Resenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveReview"
+        android:layout_marginTop="73dp"
+        android:layout_below="@+id/review_description"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:visibility="gone"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/review_rating"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:hint="Rating"
+        android:layout_below="@+id/review_description"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

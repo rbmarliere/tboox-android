@@ -100,13 +100,14 @@ public class CollectionListFragment extends android.support.v4.app.Fragment impl
     }
 
     @Override
-    public void didClickCollection(Collection collection) {
+    public void didClickCollection(final Collection collection) {
         final String uuid = collection.getBook_id();
         APIHandler handler = new APIHandler() {
             @Override
             public void handle_data(JSONObject response) {
                 Intent i = new Intent(getContext(), BookDetailActivity.class);
                 i.putExtra("book", new Book(response));
+                i.putExtra("collection", collection);
                 startActivity(i);
             }
         };
