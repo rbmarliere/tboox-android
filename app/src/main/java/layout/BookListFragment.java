@@ -3,17 +3,11 @@ package layout;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,75 +15,54 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.Header;
 import info.nsupdate.tboox.tboox.R;
 import info.nsupdate.tboox.tboox.adapters.BookAdapter;
 import info.nsupdate.tboox.tboox.models.Book;
+import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 
 public class BookListFragment extends android.support.v4.app.Fragment
 {
     private OnFragmentInteractionListener mListener;
-    private JSONObject data;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
-    public BookListFragment() {
+    public BookListFragment()
+    {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
-        JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
+        APIHandler bookListHandler = new APIHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                System.out.println("setting data!");
-                set_data(response);
-                show_data();
-            }
+            public void handle_data(JSONObject response) {
+                try {
+                    JSONArray data_array = response.getJSONArray("data");
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                System.out.println(errorResponse.toString());
-            }
+                    ArrayList<Book> books = new ArrayList<>();
+                    for (int i = 0; i < response.length(); i++)
+                        books.add(new Book(data_array.getJSONObject(i)));
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                System.out.println(responseString);
+                    mAdapter = new BookAdapter(books);
+                    mRecyclerView.setAdapter(mAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
-        Services.get(this.getContext(), handler, "/book");
-    }
-
-    public void set_data(JSONObject data) {
-        this.data = data;
-    }
-
-    private void show_data()
-    {
-        try {
-            JSONArray data_array = this.data.getJSONArray("data");
-
-            ArrayList<Book> books = new ArrayList<>();
-            for (int i = 0; i < this.data.length(); i++)
-                books.add(new Book(data_array.getJSONObject(i)));
-
-            mAdapter = new BookAdapter(books);
-            mRecyclerView.setAdapter(mAdapter);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Services.get(this.getContext(), bookListHandler, "/book");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_book_list, container, false);
@@ -103,30 +76,24 @@ public class BookListFragment extends android.support.v4.app.Fragment
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
-        /*
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-        */
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri)
+    {
+        if (mListener != null)
+            mListener.onFragmentInteraction(uri);
     }
 
     /**
@@ -139,7 +106,8 @@ public class BookListFragment extends android.support.v4.app.Fragment
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
