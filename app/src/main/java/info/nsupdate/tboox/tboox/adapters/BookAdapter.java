@@ -27,6 +27,7 @@ import info.nsupdate.tboox.tboox.LoginActivity;
 import info.nsupdate.tboox.tboox.MenuActivity;
 import info.nsupdate.tboox.tboox.R;
 import info.nsupdate.tboox.tboox.models.Book;
+import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 import layout.BookDetailFragment;
 import layout.BookListFragment;
@@ -69,32 +70,34 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         //holder.created_at.setText(b.getCreated_at());
         final String uuid = b.getUuid();
 
-        holder.btnAdd.setOnClickListener(new View.OnClickListener(){
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
                 final Context c = v.getContext();
-                JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
+                APIHandler handler = new APIHandler() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        System.out.println(response.toString());
-                        Toast.makeText(c, "Livro inserido na coleção", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        System.out.println(responseString);
+                    public void handle_data(JSONObject response) {
+                        try {
+                            if (response.get("status").toString() == "0")
+                                Toast.makeText(c, "Livro inserido na coleção", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(c, response.get("message").toString(), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 };
 
+                JSONObject object = new JSONObject();
                 JSONObject parameters = new JSONObject();
                 try {
-                    parameters.put("object", uuid);
+                    object.put("book_id", uuid);
+                    parameters.put("object", object);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                Services.post(c, handler, "/api/collection", parameters);
+                Services.post(c, handler, "/collection", parameters);
 
             }
         });

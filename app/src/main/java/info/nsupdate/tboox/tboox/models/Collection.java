@@ -13,14 +13,12 @@ public class Collection extends Model implements Serializable
 {
     private String uuid;
     private String book_id;
-    private String user_id;
     private String created_at;
 
     public Collection(JSONObject json) {
         try {
             this.uuid = (String) json.get("uuid");
             this.book_id = (String) json.get("book_id");
-            this.user_id = (String) json.get("user_id");
             this.created_at = (String) json.get("created_at");
         } catch (JSONException e) {
            e.printStackTrace();
@@ -33,10 +31,6 @@ public class Collection extends Model implements Serializable
 
     public String getBook_id() {
         return book_id;
-    }
-
-    public String getUser_id() {
-        return user_id;
     }
 
     public String getCreated_at() {
