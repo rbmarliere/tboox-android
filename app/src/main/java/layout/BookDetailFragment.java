@@ -33,7 +33,7 @@ public class BookDetailFragment extends android.support.v4.app.Fragment
     {
         super.onCreate(savedInstanceState);
 
-        APIHandler bookListHandler = new APIHandler() {
+        APIHandler handler = new APIHandler() {
             @Override
             public void handle_data(JSONObject response) {
                 try {
@@ -49,7 +49,7 @@ public class BookDetailFragment extends android.support.v4.app.Fragment
             }
         };
 
-        Services.get(this.getContext(), bookListHandler, "/book");
+        Services.get(this.getContext(), handler, "/book");
     }
 
     @Override
