@@ -45,14 +45,17 @@ public class BookListFragment extends android.support.v4.app.Fragment
                     JSONArray data_array = response.getJSONArray("data");
 
                     ArrayList<Book> books = new ArrayList<>();
-                    for (int i = 0; i < response.length(); i++)
+                    for (int i = 0; i < data_array.length(); i++)
                         books.add(new Book(data_array.getJSONObject(i)));
 
                     mAdapter = new BookAdapter(books);
                     mRecyclerView.setAdapter(mAdapter);
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                mAdapter.notifyDataSetChanged();
             }
         };
 

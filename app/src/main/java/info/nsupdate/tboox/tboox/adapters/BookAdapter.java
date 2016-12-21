@@ -1,9 +1,11 @@
 package info.nsupdate.tboox.tboox.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
     private ArrayList<Book> books;
 
     public BookAdapter(ArrayList<Book> books) {
+
         this.books = books;
     }
 
@@ -29,6 +32,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         // set the view's size, margins, paddings and layout parameters
         //...
         ViewHolder vh = new ViewHolder(v);
+
+
+        vh.relativeLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
+
+
         return vh;
 
     }
@@ -39,7 +52,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         holder.title.setText(b.getTitle());
         holder.uuid.setText(b.getUuid());
         holder.synopsis.setText(b.getSynopsis());
-        holder.created_at.setText(b.getSynopsis());
+        holder.created_at.setText(b.getCreated_at());
     }
 
     @Override
@@ -55,6 +68,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         public TextView uuid;
         public TextView synopsis;
         public TextView created_at;
+        public CardView cardView;
+        public RelativeLayout relativeLayout;
 
         public ViewHolder(View v) {
             super(v);
@@ -62,6 +77,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
             this.uuid = (TextView) v.findViewById(R.id.uuid);
             this.synopsis = (TextView) v.findViewById(R.id.synopsis);
             this.created_at = (TextView) v.findViewById(R.id.created_at);
+            this.relativeLayout = (RelativeLayout) v.findViewById(R.id.relLayout);
+            this.cardView = (CardView) v.findViewById(R.id.cardview);
+            v.setClickable(true);
         }
     }
 }
