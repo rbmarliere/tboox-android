@@ -18,6 +18,7 @@ public class APIHandler extends JsonHttpResponseHandler
     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
         System.out.println("received data : ");
         System.out.println(response.toString());
+        // todo: check empty array ?
         handle_data(response);
     }
 

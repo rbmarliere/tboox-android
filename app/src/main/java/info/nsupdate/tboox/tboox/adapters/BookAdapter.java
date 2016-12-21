@@ -15,24 +15,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.Header;
-import info.nsupdate.tboox.tboox.LoginActivity;
-import info.nsupdate.tboox.tboox.MenuActivity;
 import info.nsupdate.tboox.tboox.R;
 import info.nsupdate.tboox.tboox.models.Book;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
-import layout.BookDetailFragment;
-import layout.BookListFragment;
-
-import static android.app.PendingIntent.getActivity;
 
 /* Created by rbmarliere on 12/20/16. */
 
@@ -68,8 +59,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         holder.uuid.setText(b.getUuid());
         holder.synopsis.setText(b.getSynopsis());
         //holder.created_at.setText(b.getCreated_at());
-        final String uuid = b.getUuid();
 
+        final String uuid = b.getUuid();
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +89,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
                 }
 
                 Services.post(c, handler, "/collection", parameters);
-
             }
         });
     }
@@ -106,9 +96,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
     @Override
     public int getItemCount() {return books.size();}
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView uuid;
@@ -120,15 +107,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
 
         public ViewHolder(View v) {
             super(v);
+
             this.title = (TextView) v.findViewById(R.id.title);
             this.uuid = (TextView) v.findViewById(R.id.uuid);
             this.synopsis = (TextView) v.findViewById(R.id.synopsis);
-            //this.created_at = (TextView) v.findViewById(R.id.created_at);
+            this.created_at = (TextView) v.findViewById(R.id.created_at);
             this.relativeLayout = (RelativeLayout) v.findViewById(R.id.relLayout);
             this.cardView = (CardView) v.findViewById(R.id.cardview);
             this.btnAdd = (Button) v.findViewById(R.id.btnAdd);
-
-
 
             v.setClickable(true);
         }

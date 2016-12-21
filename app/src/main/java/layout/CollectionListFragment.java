@@ -16,9 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import info.nsupdate.tboox.tboox.R;
-import info.nsupdate.tboox.tboox.adapters.BookAdapter;
 import info.nsupdate.tboox.tboox.adapters.CollectionAdapter;
-import info.nsupdate.tboox.tboox.models.Book;
 import info.nsupdate.tboox.tboox.models.Collection;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
