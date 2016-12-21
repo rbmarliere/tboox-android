@@ -46,7 +46,7 @@ public class TimelineListFragment extends android.support.v4.app.Fragment
                     JSONArray data_array = response.getJSONArray("data");
 
                     ArrayList<Review> reviews = new ArrayList<>();
-                    for (int i = 0; i < response.length(); i++)
+                    for (int i = 0; i < data_array.length(); i++)
                         reviews.add(new Review(data_array.getJSONObject(i)));
 
                     mAdapter = new ReviewAdapter(reviews);

@@ -1,9 +1,11 @@
 package info.nsupdate.tboox.tboox.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,6 +53,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         public TextView rating;
         public TextView description;
         public TextView created_at;
+        public CardView cardView;
+        public RelativeLayout relativeLayout;
 
         public ViewHolder(View v) {
             super(v);
@@ -59,6 +63,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
             this.rating = (TextView) v.findViewById(R.id.rating);
             this.description = (TextView) v.findViewById(R.id.description);
             this.created_at = (TextView) v.findViewById(R.id.created_at);
+            this.relativeLayout = (RelativeLayout) v.findViewById(R.id.rellayout_timeline);
+            this.cardView = (CardView) v.findViewById(R.id.cardview_timeline);
+
+            v.setClickable(true);
         }
     }
 }
