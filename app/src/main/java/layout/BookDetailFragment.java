@@ -21,7 +21,7 @@ import info.nsupdate.tboox.tboox.utils.Services;
 
 public class BookDetailFragment extends android.support.v4.app.Fragment
 {
-    private BookListFragment.OnFragmentInteractionListener mListener;
+    private BookDetailFragment.OnFragmentInteractionListener mListener;
 
     public BookDetailFragment()
     {
