@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +24,7 @@ import info.nsupdate.tboox.tboox.utils.Services;
 
 /* Created by rbmarliere on 12/21/16. */
 
-public class UserListFragment extends android.support.v4.app.Fragment
+public class UserListFragment extends android.support.v4.app.Fragment implements UserAdapter.UserAdapterListener
 {
     private UserListFragment.OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -50,7 +51,7 @@ public class UserListFragment extends android.support.v4.app.Fragment
                     for (int i = 0; i < response.length(); i++)
                         users.add(new User(data_array.getJSONObject(i)));
 
-                    mAdapter = new UserAdapter(users);
+                    mAdapter = new UserAdapter(users, UserListFragment.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -94,6 +95,27 @@ public class UserListFragment extends android.support.v4.app.Fragment
     {
         if (mListener != null)
             mListener.onFragmentInteraction(uri);
+    }
+
+    @Override
+    public void subscribe(User user) {
+        final String uuid = user.getUuid();
+        final Context c = getContext();
+        APIHandler handler = new APIHandler() {
+            @Override
+            public void handle_data(JSONObject response) {
+                try {
+                    if (response.get("status").toString() == "0")
+                        Toast.makeText(c, "Subscribed", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(c, response.get("message").toString(), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Services.get(c, handler, "/user/subscribe/" + uuid);
     }
 
     /**
