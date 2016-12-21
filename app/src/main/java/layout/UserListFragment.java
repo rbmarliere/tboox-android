@@ -48,7 +48,7 @@ public class UserListFragment extends android.support.v4.app.Fragment implements
                     JSONArray data_array = response.getJSONArray("data");
 
                     ArrayList<User> users = new ArrayList<>();
-                    for (int i = 0; i < response.length(); i++)
+                    for (int i = 0; i < data_array.length(); i++)
                         users.add(new User(data_array.getJSONObject(i)));
 
                     mAdapter = new UserAdapter(users, UserListFragment.this);
