@@ -21,7 +21,7 @@ import info.nsupdate.tboox.tboox.utils.Services;
 
 /* Created by rbmarliere on 12/21/16. */
 
-public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder>
+public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> implements View.OnClickListener
 {
     private ArrayList<Collection> collection;
 
@@ -41,37 +41,42 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     @Override
     public void onBindViewHolder(CollectionAdapter.ViewHolder holder, int position) {
         Collection c = collection.get(position);
+
         holder.book_id.setText(c.getBook_id());
         holder.uuid.setText(c.getUuid());
         holder.created_at.setText(c.getCreated_at());
 
-        final String uuid = c.getUuid();
-        holder.btnDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Context c = v.getContext();
-                APIHandler handler = new APIHandler() {
-                    @Override
-                    public void handle_data(JSONObject response) {
-                        try {
-                            if (response.get("status").toString() == "0")
-                                Toast.makeText(c, "Livro removido da coleção", Toast.LENGTH_SHORT).show();
-                            else
-                                Toast.makeText(c, response.get("message").toString(), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-
-                Services.delete(c, handler, "/collection/" + uuid);
-            }
-        });
+        holder.btnDel.setOnClickListener(this);
+        holder.btnDel.setTag(position);
     }
 
     @Override
     public int getItemCount() {
         return collection.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        final Collection c = collection.get((int) view.getTag());
+        final Context context = view.getContext();
+        APIHandler handler = new APIHandler() {
+            @Override
+            public void handle_data(JSONObject response) {
+                try {
+                    if (response.get("status").toString().equals("0")) {
+                        Toast.makeText(context, "Livro removido da coleção", Toast.LENGTH_SHORT).show();
+                        collection.remove(c);
+                        notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(context, response.get("message").toString(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Services.delete(context, handler, "/collection/" + c.getUuid());
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
