@@ -16,21 +16,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import info.nsupdate.tboox.tboox.R;
-import info.nsupdate.tboox.tboox.adapters.BookAdapter;
-import info.nsupdate.tboox.tboox.adapters.CollectionAdapter;
-import info.nsupdate.tboox.tboox.models.Book;
-import info.nsupdate.tboox.tboox.models.Collection;
+import info.nsupdate.tboox.tboox.adapters.UserAdapter;
+import info.nsupdate.tboox.tboox.models.User;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 
-public class CollectionListFragment extends android.support.v4.app.Fragment
+/* Created by rbmarliere on 12/21/16. */
+
+public class UserListFragment extends android.support.v4.app.Fragment
 {
-    private CollectionListFragment.OnFragmentInteractionListener mListener;
+    private UserListFragment.OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public CollectionListFragment()
+    public UserListFragment()
     {
         // Required empty public constructor
     }
@@ -46,11 +46,11 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
                 try {
                     JSONArray data_array = response.getJSONArray("data");
 
-                    ArrayList<Collection> collection = new ArrayList<>();
+                    ArrayList<User> users = new ArrayList<>();
                     for (int i = 0; i < response.length(); i++)
-                        collection.add(new Collection(data_array.getJSONObject(i)));
+                        users.add(new User(data_array.getJSONObject(i)));
 
-                    mAdapter = new CollectionAdapter(collection);
+                    mAdapter = new UserAdapter(users);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -58,18 +58,18 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
             }
         };
 
-        Services.get(this.getContext(), handler, "/collection");
+        Services.get(this.getContext(), handler, "/user");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_collection_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_user_list, container, false);
 
         mLayoutManager = new LinearLayoutManager(this.getContext());
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.collection_recycler_view);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.user_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 

@@ -3,6 +3,7 @@ package layout;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,21 +17,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import info.nsupdate.tboox.tboox.R;
-import info.nsupdate.tboox.tboox.adapters.BookAdapter;
-import info.nsupdate.tboox.tboox.adapters.CollectionAdapter;
-import info.nsupdate.tboox.tboox.models.Book;
-import info.nsupdate.tboox.tboox.models.Collection;
+import info.nsupdate.tboox.tboox.adapters.ReviewAdapter;
+import info.nsupdate.tboox.tboox.models.Review;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 
-public class CollectionListFragment extends android.support.v4.app.Fragment
+public class TimelineListFragment extends android.support.v4.app.Fragment
 {
-    private CollectionListFragment.OnFragmentInteractionListener mListener;
+    private TimelineListFragment.OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public CollectionListFragment()
+    public TimelineListFragment()
     {
         // Required empty public constructor
     }
@@ -46,11 +45,11 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
                 try {
                     JSONArray data_array = response.getJSONArray("data");
 
-                    ArrayList<Collection> collection = new ArrayList<>();
+                    ArrayList<Review> reviews = new ArrayList<>();
                     for (int i = 0; i < response.length(); i++)
-                        collection.add(new Collection(data_array.getJSONObject(i)));
+                        reviews.add(new Review(data_array.getJSONObject(i)));
 
-                    mAdapter = new CollectionAdapter(collection);
+                    mAdapter = new ReviewAdapter(reviews);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -58,18 +57,18 @@ public class CollectionListFragment extends android.support.v4.app.Fragment
             }
         };
 
-        Services.get(this.getContext(), handler, "/collection");
+        Services.get(this.getContext(), handler, "/user/timeline");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_collection_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_timeline_list, container, false);
 
         mLayoutManager = new LinearLayoutManager(this.getContext());
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.collection_recycler_view);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.timeline_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
