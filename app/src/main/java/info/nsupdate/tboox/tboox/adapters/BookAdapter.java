@@ -45,9 +45,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         return books.size();
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView uuid;

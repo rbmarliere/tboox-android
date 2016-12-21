@@ -13,12 +13,12 @@ import info.nsupdate.tboox.tboox.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TimelineFragment.OnFragmentInteractionListener} interface
+ * {@link TimelineListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TimelineFragment#newInstance} factory method to
+ * Use the {@link TimelineListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TimelineFragment extends android.support.v4.app.Fragment {
+public class TimelineListFragment extends android.support.v4.app.Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class TimelineFragment extends android.support.v4.app.Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TimelineFragment() {
+    public TimelineListFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class TimelineFragment extends android.support.v4.app.Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TimelineFragment.
+     * @return A new instance of fragment TimelineListFragment.
      */
 
-    public static TimelineFragment newInstance(String param1, String param2) {
-        TimelineFragment fragment = new TimelineFragment();
+    public static TimelineListFragment newInstance(String param1, String param2) {
+        TimelineListFragment fragment = new TimelineListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

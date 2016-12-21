@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import layout.BookListFragment;
 import layout.CollectionListFragment;
-import layout.TimelineFragment;
+import layout.TimelineListFragment;
 
 public class MenuActivity extends  AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -79,8 +79,8 @@ public class MenuActivity extends  AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_timeline) {
-            TimelineFragment timelineFragment = new TimelineFragment();
-            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, timelineFragment, timelineFragment.getTag()).commit();
+            TimelineListFragment timelineListFragment = new TimelineListFragment();
+            fragmentManager.beginTransaction().replace(R.id.relative_content_menu, timelineListFragment, timelineListFragment.getTag()).commit();
         } else if (id == R.id.nav_book) {
             BookListFragment bookListFragment = new BookListFragment();
             fragmentManager.beginTransaction().replace(R.id.relative_content_menu, bookListFragment, bookListFragment.getTag()).commit();
