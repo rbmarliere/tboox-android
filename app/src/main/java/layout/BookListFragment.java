@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -16,13 +17,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import info.nsupdate.tboox.tboox.BookDetailActivity;
+import info.nsupdate.tboox.tboox.LoginActivity;
+import info.nsupdate.tboox.tboox.MenuActivity;
 import info.nsupdate.tboox.tboox.R;
 import info.nsupdate.tboox.tboox.adapters.BookAdapter;
 import info.nsupdate.tboox.tboox.models.Book;
 import info.nsupdate.tboox.tboox.utils.APIHandler;
 import info.nsupdate.tboox.tboox.utils.Services;
 
-public class BookListFragment extends android.support.v4.app.Fragment
+public class BookListFragment extends android.support.v4.app.Fragment implements BookAdapter.BookAdapterListener
 {
     private OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -50,7 +54,7 @@ public class BookListFragment extends android.support.v4.app.Fragment
                     for (int i = 0; i < data_array.length(); i++)
                         books.add(new Book(data_array.getJSONObject(i)));
 
-                    mAdapter = new BookAdapter(books);
+                    mAdapter = new BookAdapter(books, BookListFragment.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -95,6 +99,13 @@ public class BookListFragment extends android.support.v4.app.Fragment
     {
         if (mListener != null)
             mListener.onFragmentInteraction(uri);
+    }
+
+    @Override
+    public void didClickBook(Book book) {
+        Intent i = new Intent(getContext(), BookDetailActivity.class);
+        i.putExtra("book", book);
+        startActivity(i);
     }
 
     /**

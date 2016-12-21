@@ -29,25 +29,32 @@ import info.nsupdate.tboox.tboox.utils.Services;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
 {
-    private ArrayList<Book> books;
+    public interface BookAdapterListener {
+        void didClickBook(Book book);
+    }
 
-    public BookAdapter(ArrayList<Book> books) {this.books = books;}
+    private ArrayList<Book> books;
+    private BookAdapterListener listener;
+
+    public BookAdapter(ArrayList<Book> books, BookAdapterListener listener) {
+        this.books = books;
+        this.listener = listener;
+    }
 
     @Override
     public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.holder_book_list, parent, false);
         ViewHolder vh = new ViewHolder(v);
-/*
+
         vh.relativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                FragmentManager fragmentManager = getActivity().getFragmentManager();
-                BookDetailFragment bookDetailFragment = new BookDetailFragment();
-                fragmentManager.beginTransaction().replace(R.id.relative_content_menu, bookDetailFragment, bookDetailFragment.getTag()).commit();
+                int position = (int)v.getTag();
+                if (listener != null)
+                    listener.didClickBook(books.get(position));
             }
         });
-        */
         return vh;
 
     }
@@ -59,7 +66,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>
         holder.uuid.setText(b.getUuid());
         holder.synopsis.setText(b.getSynopsis());
         //holder.created_at.setText(b.getCreated_at());
-
+        holder.relativeLayout.setTag(position);
         final String uuid = b.getUuid();
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
